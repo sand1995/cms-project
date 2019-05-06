@@ -8,10 +8,12 @@ router.all('/*',(req,res,next)=>{
 
 
 router.get('/',(req,res)=>{
-    // res.render('admin/post');
-    res.send('working')
+    res.render('admin/posts');
 });
 
+router.get('/create',(req,res)=>{
+    res.render('admin/posts/create');
+});
 
 
 module.exports = router;
