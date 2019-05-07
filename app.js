@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 //mongo conection
 mongoose.connect('mongodb://localhost:27017/cms', {useNewUrlParser: true}).then((db)=>{
@@ -21,7 +21,7 @@ app.set('view engine', 'handlebars');
 
 //body parser
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json);
+app.use(bodyParser.json());
 
 //load routes
 const routesHome = require('./routes/home/index');

@@ -9,7 +9,11 @@ router.all('/*',(req,res,next)=>{
 
 
 router.get('/',(req,res)=>{
-    res.render('admin/posts/index');
+    Post.find({}).then(posts=>{
+        res.render('admin/posts/index', {posts: posts});
+    })
+    
+
 });
 
 router.get('/create',(req,res)=>{
@@ -36,6 +40,12 @@ router.post('/create',(req,res)=>{
         res.redirect('/admin/posts');
     }).catch(err=>{
         console.log('post no saved'); 
+    });
+});
+
+router.get('/edit/:id',(req, res)=>{
+    Post.findOne({_id:req.params.id}).then(post=>{
+        res.render('admin/posts/edit',{post: post});
     });
 });
 
