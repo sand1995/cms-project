@@ -54,9 +54,7 @@ router.post('/create',(req,res)=>{
         image: imageName,
     })
     newPost.save().then(savedPost=>{
-        req.flash('success_message',`Post ${savedPost.title} was created succesfully`);
-        console.log(savedPost);
-        
+        req.flash('success_message',`Post ${savedPost.title} was created succesfully`); 
         res.redirect('/admin/posts');
     }).catch(err=>{
         console.log('post no saved'); 
@@ -82,6 +80,21 @@ router.put('/edit/:id',(req, res)=>{
         post.allowComments = allowComments;
         post.body = req.body.body;
         
+        if (!isEmpty(req.files)) {
+            let image = req.files.image;
+            imageName = Date.now()+image.name;
+
+            if(post.image!='empty.png'){
+                fs.unlink(uploadDir+post.image,()=>{     
+                });
+            };
+            post.image = imageName;      
+    
+            image.mv('./public/uploads/'+ imageName, err=>{
+                if (err) throw err;
+            });
+        };
+
         post.save().then(updatedPost=>{
             res.redirect('/admin/posts');
         }).catch(err=>{
