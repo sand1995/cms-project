@@ -5,6 +5,7 @@
         <tr>
             <th>ID</th>
             <th>TITLE</th>
+            <th>Image</th>
             <th>STATUS</TH>
             <th>Allow Comments</th>
         </tr>
@@ -14,9 +15,15 @@
         <tr>
             <td>{{id}}</td>
             <td>{{title}}</td>
+            <td><img height="50" class="img-responsive" src="/uploads/{{image}}" alt=""></td>
             <td>{{status}}</td>
             <td>{{allowComments}}</td>
             <td><a href="/admin/posts/edit/{{id}}" class="btn btn-info">Edit</a></td>
+            <td>
+                <form action="/admin/posts/{{id}}?_method=DELETE" method="POST">
+                    <button type="submit" class="btn btn-danger">DELETE</button>
+                </form>
+            </td>
         </tr>
         {{/each}}
     </tbody>

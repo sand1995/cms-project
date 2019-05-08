@@ -18,6 +18,9 @@ const PostSchema = new Schema({
     body:{
         type:String,
         require: true
+    },
+    image:{
+        type: String
     }
 });
 

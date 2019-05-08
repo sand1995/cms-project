@@ -4,6 +4,10 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const upload = require('express-fileupload');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 //mongo conection
 mongoose.connect('mongodb://localhost:27017/cms', {useNewUrlParser: true}).then((db)=>{
@@ -12,16 +16,35 @@ mongoose.connect('mongodb://localhost:27017/cms', {useNewUrlParser: true}).then(
 }).catch(err=>console.log(err));
 
 
-
-
 app.use(express.static(path.join(__dirname,'public')));
+
 //set view engine
-app.engine('handlebars', exphbs({defaultLayout: 'home'}));
+const {select} = require('./helpers/handlebars-helper');
+app.engine('handlebars', exphbs({defaultLayout: 'home', helpers: {select: select}}));
 app.set('view engine', 'handlebars');
+
+//upload middleware
+app.use(upload());
 
 //body parser
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+
+//method Override
+app.use(methodOverride('_method'));
+
+app.use(session({
+    secret: 'Zant123',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(flash());
+
+//Local Variables using Middleware
+app.use((req, res, next)=>{
+    res.locals.success_message = req.flash('success_message');
+    next();
+});
 
 //load routes
 const routesHome = require('./routes/home/index');
