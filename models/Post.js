@@ -21,6 +21,10 @@ const PostSchema = new Schema({
     },
     image:{
         type: String
+    },
+    date:{
+        type: Date,
+        default: Date.now()
     }
 });
 

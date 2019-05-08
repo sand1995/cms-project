@@ -12,6 +12,7 @@
             <th>Image</th>
             <th>STATUS</TH>
             <th>Allow Comments</th>
+            <th>Date</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,7 @@
             <td><img height="50" class="img-responsive" src="/uploads/{{image}}" alt=""></td>
             <td>{{status}}</td>
             <td>{{allowComments}}</td>
+            <td>{{generateTime date 'MMMM Do YYYY'}}</td>
             <td><a href="/admin/posts/edit/{{id}}" class="btn btn-info">Edit</a></td>
             <td>
                 <form action="/admin/posts/{{id}}?_method=DELETE" method="POST">
