@@ -50,10 +50,12 @@ app.use((req, res, next)=>{
 const routesHome = require('./routes/home/index');
 const routesAdmin = require('./routes/admin/index');
 const routesPosts = require('./routes/admin/posts');
+const routesCategories = require('./routes/admin/categories');
 //use routes
 app.use('/',routesHome);
 app.use('/admin',routesAdmin);
 app.use('/admin/posts',routesPosts);
+app.use('/admin/categories',routesCategories);
 
 
 app.listen(4500,()=>{
