@@ -1,6 +1,7 @@
+
 <div class="card card-login mx-auto mt-5">
     <div class="card-header">Login</div>
-
+    {{> home/form-message}}
     <div class="card-body">
         <form action="/login" method="post">
             {{#if error}}
