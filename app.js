@@ -8,9 +8,11 @@ const methodOverride = require('method-override');
 const upload = require('express-fileupload');
 const session = require('express-session');
 const flash = require('connect-flash');
+const {mongoDBUrl} = require('./config/database'); 
+const passport = require('passport');
 
 //mongo conection
-mongoose.connect('mongodb://localhost:27017/cms', {useNewUrlParser: true}).then((db)=>{
+mongoose.connect(mongoDBUrl, {useNewUrlParser: true}).then((db)=>{
     console.log('MongoDB Connected');
     
 }).catch(err=>console.log(err));
@@ -39,6 +41,10 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(flash());
+
+//PASSPORT
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Local Variables using Middleware
 app.use((req, res, next)=>{
