@@ -61,6 +61,11 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
+router.get('/logout', (req, res) => {
+    req.logOut();
+    res.redirect('/login');
+})
+
 
 router.get('/register', (req, res) => {
     res.render('home/register');
@@ -81,7 +86,7 @@ router.post('/register', (req, res) => {
         User.findOne({ email: req.body.email }).then(userExist => {
             if (!userExist) {
                 const newUser = new User({
-                    fistName: req.body.fistName,
+                    firstName: req.body.firstName,
                     lastName: req.body.lastName,
                     email: req.body.email,
                     password: req.body.password,

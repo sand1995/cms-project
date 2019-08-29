@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const faker = require('faker');
 const Post = require('../../models/Post');
+const {userAuthenticated} = require('../../helpers/authentication');
 
-router.all('/*',(req,res,next)=>{
+
+router.all('/*',userAuthenticated,(req,res,next)=>{
     req.app.locals.layout = 'admin';
     next();
 });
