@@ -60,11 +60,13 @@ const routesHome = require('./routes/home/index');
 const routesAdmin = require('./routes/admin/index');
 const routesPosts = require('./routes/admin/posts');
 const routesCategories = require('./routes/admin/categories');
+const routesComments = require('./routes/admin/comments');
 //use routes
 app.use('/',routesHome);
 app.use('/admin',routesAdmin);
 app.use('/admin/posts',routesPosts);
 app.use('/admin/categories',routesCategories);
+app.use('/admin/comments',routesComments);
 
 
 app.listen(4500,()=>{

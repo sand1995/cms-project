@@ -59,7 +59,7 @@ router.post('/create',(req,res)=>{
         category: req.body.category
     })
     newPost.save().then(savedPost=>{
-        req.flash('success_message',`Post ${savedPost.title} was created succesfully`); 
+        req.flash('success_message',`Post ${savedPost.title} was created successfully`); 
         res.redirect('/admin/posts');
     }).catch(err=>{
         console.log('post no saved'); 
